@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 class MainClass {
 	inventory inv = new inventory();
@@ -158,22 +158,33 @@ class MainClass {
 	}
 
 	public void RenderWorld() {
-		Console.WriteLine("-----");
+		Console.WriteLine("―――――");
 		string bufferText = "";
 		for(int r = 0; r < gameArray2D.GetLength(1); r++){
 			for(int c = 0; c < gameArray2D.GetLength(0); c++){
 				if(c == 0){
-					bufferText = gameArray2D[r, c].ToString();
+					switch(gameArray2D[r, c])
+					{
+						case 0:
+							bufferText = " ";
+							break;
+						case 1:
+							bufferText = "☐";
+						case 2:
+							bufferText = "웃";
+						case 3:
+							bufferText = "⊡";
+					}
 				}
 				else{
-					bufferText = bufferText + gameArray2D[r, c].ToString();
+					bufferText += gameArray2D[r, c].ToString();
 				}
 				if(c == gameArray2D.GetLength(0)-1){
 					Console.WriteLine(bufferText);
 				}
 			}
 		}
-		Console.WriteLine("-----");
+		Console.WriteLine("――――――");
 	}
 }
 

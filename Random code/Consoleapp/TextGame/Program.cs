@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,19 +6,23 @@ using System.Threading.Tasks;
 
 namespace TextGame
 {
+	using System;
+
 	class MainClass
 	{
-		inventory inv = new inventory();
+		character character = new character();
+		actions actions = new actions();
 		public int[,] gameArray2D = new int[5, 5] {
 		{ 1, 1, 1, 1, 1 },
 		{ 1, 0, 3, 0, 1 },
 		{ 1, 0, 2, 0, 1 },
 		{ 1, 0, 0, 0, 1 },
 		{ 1, 1, 1, 1, 1 }
-	};
+		};
 		public bool exit = false;
 		public int playerRow;
 		public int playerColumn;
+		
 
 		public static void Main()
 		{
@@ -99,6 +103,11 @@ namespace TextGame
 					Valid = true;
 					return "right";
 				}
+				else if (lineInput == "stats")
+				{
+					Valid = true;
+					return "stats";
+				}
 				else if (lineInput == "exit")
 				{
 					Valid = true;
@@ -131,13 +140,21 @@ namespace TextGame
 			{
 				DoRight();
 			}
-			RenderWorld();
+
+			if (inputAction == "stats")
+			{
+				character.DisplayStats();
+			}
+			else
+			{
+				RenderWorld();
+			}
 		}
 
 		public void DoUp()
 		{
 			FindPlayer();
-			if (gameArray2D[playerRow - 1, playerColumn] == 0)
+			if (MakeAction(gameArray2D[playerRow - 1, playerColumn], playerRow - 1, playerColumn))
 			{
 				gameArray2D[playerRow - 1, playerColumn] = 2;
 				gameArray2D[playerRow, playerColumn] = 0;
@@ -151,7 +168,7 @@ namespace TextGame
 		public void DoDown()
 		{
 			FindPlayer();
-			if (gameArray2D[playerRow + 1, playerColumn] == 0)
+			if (MakeAction(gameArray2D[playerRow + 1, playerColumn], playerRow + 1, playerColumn))
 			{
 				gameArray2D[playerRow + 1, playerColumn] = 2;
 				gameArray2D[playerRow, playerColumn] = 0;
@@ -165,7 +182,7 @@ namespace TextGame
 		public void DoLeft()
 		{
 			FindPlayer();
-			if (gameArray2D[playerRow, playerColumn - 1] == 0)
+			if (MakeAction(gameArray2D[playerRow, playerColumn - 1], playerRow, playerColumn - 1))
 			{
 				gameArray2D[playerRow, playerColumn - 1] = 2;
 				gameArray2D[playerRow, playerColumn] = 0;
@@ -179,7 +196,7 @@ namespace TextGame
 		public void DoRight()
 		{
 			FindPlayer();
-			if (gameArray2D[playerRow, playerColumn + 1] == 0)
+			if (MakeAction(gameArray2D[playerRow, playerColumn + 1], playerRow, playerColumn + 1))
 			{
 				gameArray2D[playerRow, playerColumn + 1] = 2;
 				gameArray2D[playerRow, playerColumn] = 0;
@@ -190,6 +207,21 @@ namespace TextGame
 			}
 		}
 
+		public bool MakeAction(int obj, int objRow, int objColumn)
+		{
+			switch (obj)
+			{
+				case 0:
+					return true;
+				case 1:
+					return false;
+				case 3:
+					actions.OpenChest(objRow, objColumn);
+					return true;
+			}
+			return false;
+		}
+
 		public void FindPlayer()
 		{
 			SearchArray(2, gameArray2D, out playerRow, out playerColumn);
@@ -197,7 +229,7 @@ namespace TextGame
 
 		public void RenderWorld()
 		{
-			Console.WriteLine("-----");
+			Console.WriteLine("------");
 			string bufferText = "";
 			for (int r = 0; r < gameArray2D.GetLength(1); r++)
 			{
@@ -205,12 +237,41 @@ namespace TextGame
 				{
 					if (c == 0)
 					{
-						bufferText = gameArray2D[r, c].ToString();
+						switch (gameArray2D[r, c])
+						{
+							case 0:
+								bufferText = " ";
+								break;
+							case 1:
+								bufferText = "#";
+								break;
+							case 2:
+								bufferText = "M";
+								break;
+							case 3:
+								bufferText = "c";
+								break;
+						}
 					}
 					else
 					{
-						bufferText = bufferText + gameArray2D[r, c].ToString();
+						switch (gameArray2D[r, c])
+						{
+							case 0:
+								bufferText += " ";
+								break;
+							case 1:
+								bufferText += "#";
+								break;
+							case 2:
+								bufferText += "M";
+								break;
+							case 3:
+								bufferText += "c";
+								break;
+						}
 					}
+					bufferText += " ";
 					if (c == gameArray2D.GetLength(0) - 1)
 					{
 						Console.WriteLine(bufferText);
@@ -221,14 +282,48 @@ namespace TextGame
 		}
 	}
 
-	class inventory
+	class character
 	{
-		public int health;
+		public int health = 100;
+		public int attack = 10;
+		public int[] inventory = new int[]
+		{
+
+		};
+
 
 		public void statReset()
 		{
 			health = 100;
+			attack = 10;
 		}
 
+		public void DisplayStats()
+		{
+			Console.WriteLine("Health: " + health);
+			Console.WriteLine("atk: " + attack);
+		}
+	}
+
+	class actions
+	{
+		public void OpenChest(int Row, int Column)
+		{
+
+		}
+	}
+
+	class register
+	{
+		public string[,] chestMemory = new string[,]
+		{
+			{"2", "1", "Sword"}
+		};
+
+		public string[,] IdList = new string[,]
+		{
+			{"0001", "Sword" },
+			{"0002", "Backpack" }
+		};
 	}
 }
