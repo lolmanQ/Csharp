@@ -10,15 +10,16 @@ namespace TextGame
 	{
 		public string[,] chestMemory = new string[,]
 		{
-			{"1, 2", "Sword"},
-			{"4, 5", "Backpack"}
+			{"W1", "1, 2", "Sword"},
+			{"W1", "4, 5", "Backpack"}
 		};
 
 		public string[,] IdList = new string[,]
 		{
 			{"0000", "error"},
 			{"0001", "Sword" },
-			{"0002", "Backpack" }
+			{"0002", "Backpack" },
+			{"0003", "Enemy flesh" }
 		};
 
 		public string GetId(string name)

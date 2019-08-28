@@ -18,6 +18,7 @@ namespace TextGame
 		{ 1, 4, 0, 0, 0, 3, 1, 1 },
 		{ 1, 1, 1, 1, 1, 1, 1, 0 }
 		};
+		public string currentWorld = "W1";
 		public bool exit = false;
 		public int playerRow;
 		public int playerColumn;
@@ -52,7 +53,7 @@ namespace TextGame
 			string inputAction;
 			while (!exit)
 			{
-				inputAction = inputMethod();
+				inputAction = InputMethod();
 				if (inputAction != "exit")
 				{
 					DoAction(inputAction);
@@ -60,7 +61,7 @@ namespace TextGame
 			}
 		}
 
-		public string inputMethod()
+		public string InputMethod()
 		{
 			bool Valid = false;
 			while (!Valid)
@@ -133,7 +134,7 @@ namespace TextGame
 		public void DoUp()
 		{
 			FindPlayer();
-			if (gameActions.MakeAction(gameArray2D[playerRow - 1, playerColumn], playerRow - 1, playerColumn))
+			if (gameActions.MakeAction(gameArray2D[playerRow - 1, playerColumn], playerRow - 1, playerColumn, currentWorld))
 			{
 				gameArray2D[playerRow - 1, playerColumn] = 2;
 				gameArray2D[playerRow, playerColumn] = 0;
@@ -147,7 +148,7 @@ namespace TextGame
 		public void DoDown()
 		{
 			FindPlayer();
-			if (gameActions.MakeAction(gameArray2D[playerRow + 1, playerColumn], playerRow + 1, playerColumn))
+			if (gameActions.MakeAction(gameArray2D[playerRow + 1, playerColumn], playerRow + 1, playerColumn, currentWorld))
 			{
 				gameArray2D[playerRow + 1, playerColumn] = 2;
 				gameArray2D[playerRow, playerColumn] = 0;
@@ -161,7 +162,7 @@ namespace TextGame
 		public void DoLeft()
 		{
 			FindPlayer();
-			if (gameActions.MakeAction(gameArray2D[playerRow, playerColumn - 1], playerRow, playerColumn - 1))
+			if (gameActions.MakeAction(gameArray2D[playerRow, playerColumn - 1], playerRow, playerColumn - 1, currentWorld))
 			{
 				gameArray2D[playerRow, playerColumn - 1] = 2;
 				gameArray2D[playerRow, playerColumn] = 0;
@@ -175,7 +176,7 @@ namespace TextGame
 		public void DoRight()
 		{
 			FindPlayer();
-			if (gameActions.MakeAction(gameArray2D[playerRow, playerColumn + 1], playerRow, playerColumn + 1))
+			if (gameActions.MakeAction(gameArray2D[playerRow, playerColumn + 1], playerRow, playerColumn + 1, currentWorld))
 			{
 				gameArray2D[playerRow, playerColumn + 1] = 2;
 				gameArray2D[playerRow, playerColumn] = 0;
@@ -190,6 +191,7 @@ namespace TextGame
 		{
 			SearchArray(2, gameArray2D, out playerRow, out playerColumn);
 		}
+
 
 		public void RenderWorld()
 		{

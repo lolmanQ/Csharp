@@ -15,7 +15,7 @@ namespace TextGame
 
 
 
-		public void statReset()
+		public void StatReset()
 		{
 			health = 100;
 			attack = 10;
@@ -30,10 +30,6 @@ namespace TextGame
 		public void DisplayInventory()
 		{
 			string DisplayBufferInventory = "";
-			foreach (string a in inventory)
-			{
-				Console.WriteLine(a);
-			}
 			foreach (string ItemId in inventory)
 			{
 				if (DisplayBufferInventory == "")
@@ -48,13 +44,9 @@ namespace TextGame
 			Console.WriteLine("Your inventory contains: " + DisplayBufferInventory);
 		}
 
-		public void addToInv(string item)
+		public void AddToInv(string item)
 		{
 			inventory.Add(item);
-			foreach (string a in inventory)
-			{
-				Console.WriteLine(a);
-			}
 		}
 	}
 }
