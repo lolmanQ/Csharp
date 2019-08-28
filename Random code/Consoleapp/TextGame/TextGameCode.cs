@@ -10,14 +10,8 @@ namespace TextGame
 	{
 		Character character = new Character();
 		GameActions gameActions = new GameActions();
-		public int[,] gameArray2D = new int[,] {
-		{ 1, 1, 1, 1, 1, 1, 1, 0 },
-		{ 1, 0, 3, 0, 0, 0, 1, 0 },
-		{ 1, 0, 0, 0, 0, 0, 1, 1 },
-		{ 1, 0, 0, 2, 0, 0, 0, 9 },
-		{ 1, 4, 0, 0, 0, 3, 1, 1 },
-		{ 1, 1, 1, 1, 1, 1, 1, 0 }
-		};
+		World world = new World();
+		public int[,] gameArray2D = new int[,]{};
 		public string currentWorld = "W1";
 		public bool exit = false;
 		public int playerRow;
@@ -50,13 +44,18 @@ namespace TextGame
 
 		public void GameLoop()
 		{
+			currentWorld = world.CurrentMap;
+			gameArray2D = world.Map;
+			RenderWorld();
 			string inputAction;
 			while (!exit)
 			{
 				inputAction = InputMethod();
 				if (inputAction != "exit")
 				{
+					gameArray2D = world.Map;
 					DoAction(inputAction);
+					world.UpdateMap(gameArray2D);
 				}
 			}
 		}
@@ -89,6 +88,10 @@ namespace TextGame
 						return "inv";
 					case "exit":
 						return "exit";
+					case "w1":
+						return "w1";
+					case "w2":
+						return "w2";
 					default:
 						Console.WriteLine("Invalid retry");
 						break;
@@ -124,6 +127,18 @@ namespace TextGame
 			else if (inputAction == "inv")
 			{
 				character.DisplayInventory();
+			}
+			else if (inputAction == "w1")
+			{
+				world.SetMap("W1");
+				gameArray2D = world.Map;
+				RenderWorld();
+			}
+			else if (inputAction == "w2")
+			{
+				world.SetMap("W2");
+				gameArray2D = world.Map;
+				RenderWorld();
 			}
 			else
 			{

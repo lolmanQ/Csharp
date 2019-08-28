@@ -13,6 +13,11 @@ namespace TextGame
 			{"W1", "1, 2", "Sword"},
 			{"W1", "4, 5", "Backpack"}
 		};
+		public string[,] doorMemory = new string[,]
+		{
+			{"W1", "3, 7", "W2"},
+			{"W2", "0, 3", "W1"}
+		};
 
 		public string[,] IdList = new string[,]
 		{
