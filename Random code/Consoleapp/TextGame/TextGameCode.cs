@@ -10,7 +10,7 @@ namespace TextGame
 	{
 		Character character = new Character();
 		GameActions gameActions = new GameActions();
-		public int[,] gameArray2D = new int[6, 8] {
+		public int[,] gameArray2D = new int[,] {
 		{ 1, 1, 1, 1, 1, 1, 1, 0 },
 		{ 1, 0, 3, 0, 0, 0, 1, 0 },
 		{ 1, 0, 0, 0, 0, 0, 1, 1 },

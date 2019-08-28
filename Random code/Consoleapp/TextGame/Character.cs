@@ -9,8 +9,8 @@ namespace TextGame
 	class Character
 	{
 		Register register = new Register();
-		public int health = 100;
-		public int attack = 10;
+		public static int health = 100;
+		public static int attack = 10;
 		public static List<string> inventory = new List<string>();
 
 
@@ -47,6 +47,24 @@ namespace TextGame
 		public void AddToInv(string item)
 		{
 			inventory.Add(item);
+		}
+
+		public List<string> GetInventory()
+		{
+			return inventory;
+		}
+
+		public void ChangeStats(string Stat, int Amount)
+		{
+			switch (Stat)
+			{
+				case "hp":
+					health = health + Amount;
+					break;
+				case "atk":
+					attack = attack + Amount;
+					break;
+			}
 		}
 	}
 }

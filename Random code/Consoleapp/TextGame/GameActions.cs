@@ -23,7 +23,7 @@ namespace TextGame
 					OpenChest(World, objRow, objColumn);
 					return true;
 				case 4:
-					return false;
+					return AttackEnemy();
 				case 9:
 					return false;
 			}
@@ -50,9 +50,22 @@ namespace TextGame
 			return "error";
 		}
 
-		public void AttackEnemy()
+		public bool AttackEnemy()
 		{
-
+			int ItemIndex = character.GetInventory().IndexOf("0001");
+			if(ItemIndex >= 0)
+			{
+				string loot = "0003";
+				character.AddToInv(loot);
+				Console.WriteLine("The monster dropt: " + register.GetName(loot));
+				return true;
+			}
+			else
+			{
+				character.ChangeStats("hp", -10);
+				Console.WriteLine("You took 10 damage, you have nothing to fight with!");
+				return false;
+			}
 		}
 	}
 }
