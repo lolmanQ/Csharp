@@ -9,7 +9,7 @@ namespace TextGame
 	class TextGameCode
 	{
 		Character character = new Character();
-		GameActions GameActions = new GameActions();
+		GameActions gameActions = new GameActions();
 		public int[,] gameArray2D = new int[6, 8] {
 		{ 1, 1, 1, 1, 1, 1, 1, 0 },
 		{ 1, 0, 3, 0, 0, 0, 1, 0 },
@@ -67,45 +67,31 @@ namespace TextGame
 			{
 				string lineInput = Console.ReadLine();
 				lineInput = lineInput.ToLower();
-				if (lineInput == "up")
+				switch (lineInput)
 				{
-					Valid = true;
-					return "up";
-				}
-				else if (lineInput == "down")
-				{
-					Valid = true;
-					return "down";
-				}
-				else if (lineInput == "left")
-				{
-					Valid = true;
-					return "left";
-				}
-				else if (lineInput == "right")
-				{
-					Valid = true;
-					return "right";
-				}
-				else if (lineInput == "stats")
-				{
-					Valid = true;
-					return "stats";
-				}
-				else if (lineInput == "inv")
-				{
-					Valid = true;
-					return "inv";
-				}
-				else if (lineInput == "exit")
-				{
-					Valid = true;
-					exit = true;
-					return "exit";
-				}
-				else
-				{
-					Console.WriteLine("Invalid retry");
+					case "u":
+					case "up":
+						return "up";
+					case "d":
+					case "down":
+						return "down";
+					case "l":
+					case "left":
+						return "left";
+					case "r":
+					case "right":
+						return "right";
+					case "stats":
+						return "stats";
+					case "inv":
+					case "inventory":
+						return "inv";
+					case "exit":
+						return "exit";
+					default:
+						Console.WriteLine("Invalid retry");
+						break;
+
 				}
 			}
 			return "exit";
@@ -147,7 +133,7 @@ namespace TextGame
 		public void DoUp()
 		{
 			FindPlayer();
-			if (MakeAction(gameArray2D[playerRow - 1, playerColumn], playerRow - 1, playerColumn))
+			if (gameActions.MakeAction(gameArray2D[playerRow - 1, playerColumn], playerRow - 1, playerColumn))
 			{
 				gameArray2D[playerRow - 1, playerColumn] = 2;
 				gameArray2D[playerRow, playerColumn] = 0;
@@ -161,7 +147,7 @@ namespace TextGame
 		public void DoDown()
 		{
 			FindPlayer();
-			if (MakeAction(gameArray2D[playerRow + 1, playerColumn], playerRow + 1, playerColumn))
+			if (gameActions.MakeAction(gameArray2D[playerRow + 1, playerColumn], playerRow + 1, playerColumn))
 			{
 				gameArray2D[playerRow + 1, playerColumn] = 2;
 				gameArray2D[playerRow, playerColumn] = 0;
@@ -175,7 +161,7 @@ namespace TextGame
 		public void DoLeft()
 		{
 			FindPlayer();
-			if (MakeAction(gameArray2D[playerRow, playerColumn - 1], playerRow, playerColumn - 1))
+			if (gameActions.MakeAction(gameArray2D[playerRow, playerColumn - 1], playerRow, playerColumn - 1))
 			{
 				gameArray2D[playerRow, playerColumn - 1] = 2;
 				gameArray2D[playerRow, playerColumn] = 0;
@@ -189,7 +175,7 @@ namespace TextGame
 		public void DoRight()
 		{
 			FindPlayer();
-			if (MakeAction(gameArray2D[playerRow, playerColumn + 1], playerRow, playerColumn + 1))
+			if (gameActions.MakeAction(gameArray2D[playerRow, playerColumn + 1], playerRow, playerColumn + 1))
 			{
 				gameArray2D[playerRow, playerColumn + 1] = 2;
 				gameArray2D[playerRow, playerColumn] = 0;
@@ -198,25 +184,6 @@ namespace TextGame
 			{
 				Console.WriteLine("Something is in the way");
 			}
-		}
-
-		public bool MakeAction(int obj, int objRow, int objColumn)
-		{
-			switch (obj)
-			{
-				case 0:
-					return true;
-				case 1:
-					return false;
-				case 3:
-					GameActions.OpenChest(objRow, objColumn);
-					return true;
-				case 4:
-					return false;
-				case 9:
-					return false;
-			}
-			return false;
 		}
 
 		public void FindPlayer()
