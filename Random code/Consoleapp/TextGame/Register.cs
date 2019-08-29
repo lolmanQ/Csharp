@@ -15,8 +15,8 @@ namespace TextGame
 		};
 		public string[,] doorMemory = new string[,]
 		{
-			{"W1", "3, 7", "W2"},
-			{"W2", "0, 3", "W1"}
+			{"W1", "3, 7", "0001D", "0002D"},
+			{"W2", "0, 3", "0002D", "0001D"}
 		};
 
 		public string[,] IdList = new string[,]

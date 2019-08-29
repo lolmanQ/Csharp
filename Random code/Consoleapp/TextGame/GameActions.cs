@@ -11,24 +11,6 @@ namespace TextGame
 		Register register = new Register();
 		Character character = new Character();
 
-		public bool MakeAction(int obj, int objRow, int objColumn, string World)
-		{
-			switch (obj)
-			{
-				case 0:
-					return true;
-				case 1:
-					return false;
-				case 3:
-					OpenChest(World, objRow, objColumn);
-					return true;
-				case 4:
-					return AttackEnemy();
-				case 9:
-					return false;
-			}
-			return false;
-		}
 
 		public void OpenChest(string World, int Row, int Column)
 		{

@@ -315,11 +315,16 @@ using System.Threading.Tasks;
 			Console.WriteLine(boxSpace);
 		}
 
-		public void OpenDoor(){
+		public void OpenDoor()
+		{
 
 		}
 
+		public void FindDoor()
+	{
+
 	}
+}
 
 	class Character
 	{
