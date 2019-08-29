@@ -11,6 +11,7 @@ namespace TextGame
 		Character character = new Character();
 		GameActions gameActions = new GameActions();
 		World world = new World();
+		Register register = new Register();
 		public int[,] gameArray2D = new int[,]{};
 		public string currentWorld = "W1";
 		public bool exit = false;
@@ -147,21 +148,22 @@ namespace TextGame
 			}
 		}
 
-		public bool MakeAction(int obj, int objRow, int objColumn, string World)
+		public bool MakeAction(int obj, int objRow, int objColumn, string CurrentMap)
 		{
 			switch (obj)
 			{
 				case 0:
 					return true;
 				case 1:
+					Console.WriteLine("A wall is in the way");
 					return false;
 				case 3:
-					gameActions.OpenChest(World, objRow, objColumn);
+					gameActions.OpenChest(CurrentMap, objRow, objColumn);
 					return true;
 				case 4:
 					return gameActions.AttackEnemy();
 				case 9:
-
+					OpenDoor(CurrentMap, objRow, objColumn);
 					return false;
 			}
 			return false;
@@ -175,10 +177,6 @@ namespace TextGame
 				gameArray2D[playerRow - 1, playerColumn] = 2;
 				gameArray2D[playerRow, playerColumn] = 0;
 			}
-			else
-			{
-				Console.WriteLine("Something is in the way");
-			}
 		}
 
 		public void DoDown()
@@ -188,10 +186,6 @@ namespace TextGame
 			{
 				gameArray2D[playerRow + 1, playerColumn] = 2;
 				gameArray2D[playerRow, playerColumn] = 0;
-			}
-			else
-			{
-				Console.WriteLine("Something is in the way");
 			}
 		}
 
@@ -203,10 +197,6 @@ namespace TextGame
 				gameArray2D[playerRow, playerColumn - 1] = 2;
 				gameArray2D[playerRow, playerColumn] = 0;
 			}
-			else
-			{
-				Console.WriteLine("Something is in the way");
-			}
 		}
 
 		public void DoRight()
@@ -216,10 +206,6 @@ namespace TextGame
 			{
 				gameArray2D[playerRow, playerColumn + 1] = 2;
 				gameArray2D[playerRow, playerColumn] = 0;
-			}
-			else
-			{
-				Console.WriteLine("Something is in the way");
 			}
 		}
 
@@ -307,14 +293,71 @@ namespace TextGame
 			Console.WriteLine(boxSpace);
 		}
 
-		public void OpenDoor()
+		public void OpenDoor(string CurrentMap, int DoorRow, int DoorColumn)
 		{
-
+			FindDoorPos(CurrentMap, DoorRow, DoorColumn, out string DoorWantToBeOpen, out string DoorWantToComeOut);
+			FindDoorID(DoorWantToComeOut, "World", "Player", out string ChangeToMap, out int PointPosRow, out int PointPosColumn);
+			world.SetMap(ChangeToMap);
+			gameArray2D = world.Map;
+			currentWorld = ChangeToMap;
+			FindPlayer();
+			gameArray2D[playerRow, playerColumn] = 0;
+			gameArray2D[PointPosRow, PointPosColumn] = 2;
+			
 		}
 
-		public void FindDoor(string CurrentMap, int DoorRow, int DoorColumn)
+		public void FindDoorPos(string CurrentMap, int DoorRow, int DoorColumn, out string DoorCurrent, out string DoorPoint)
 		{
+			DoorCurrent = "";
+			DoorPoint = "";
+			string DoorPos = DoorRow + ", " + DoorColumn;
+			for (int i = 0; i < register.doorMemory.GetLength(0); i++)
+			{
+				if (DoorPos == register.doorMemory[i, 1] && CurrentMap == register.doorMemory[i, 0])
+				{
+					DoorCurrent = register.doorMemory[i, 2];
+					DoorPoint = register.doorMemory[i, 3];
+				}
+			}
+		}
 
+		public void FindDoorID(string DoorID, string WantToGetVar, string WantToGetPos, out string output, out int outputRow, out int outputColumn)
+		{
+			output = "";
+			outputRow = 0;
+			outputColumn = 0;
+			for (int i = 0; i < register.doorMemory.GetLength(0); i++)
+			{
+				if (DoorID == register.doorMemory[i, 2])
+				{
+					string[] CharacterPos = register.doorMemory[i, 4].Split(new Char[] { ',', ' '}, StringSplitOptions.RemoveEmptyEntries);
+					string[] DoorPos = register.doorMemory[i, 1].Split(new Char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+					switch (WantToGetPos)
+					{
+						case "Door":
+							outputRow = int.Parse(DoorPos[0]);
+							outputColumn = int.Parse(DoorPos[1]);
+							break;
+						case "Player":
+							outputRow = int.Parse(CharacterPos[0]);
+							outputColumn = int.Parse(CharacterPos[1]);
+							break;
+					}
+
+					switch (WantToGetVar)
+					{
+						case "World":
+							output = register.doorMemory[i, 0];
+							break;
+						case "ID":
+							output = register.doorMemory[i, 2];
+							break;
+						case "Point":
+							output = register.doorMemory[i, 3];
+							break;
+					}
+				}
+			}
 		}
 	}
 }

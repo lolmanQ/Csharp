@@ -22,7 +22,7 @@ namespace TextGame
 		public string FindChestItem(string World, int Row, int Column)
 		{
 			string ChestPos = Row + ", " + Column;
-			for (int i = 0; i < register.chestMemory.GetLength(1); i++)
+			for (int i = 0; i < register.chestMemory.GetLength(0); i++)
 			{
 					if (ChestPos == register.chestMemory[i, 1] && World == register.chestMemory[i, 0])
 				{
