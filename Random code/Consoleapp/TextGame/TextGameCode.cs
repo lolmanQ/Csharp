@@ -87,6 +87,7 @@ namespace TextGame
 					case "inventory":
 						return "inv";
 					case "exit":
+					case "die":
 						return "exit";
 					case "w1":
 						return "w1";
