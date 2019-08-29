@@ -29,15 +29,24 @@ namespace TextGame
 
 		public int[,] W2 = new int[,] {
 		{ 0, 1, 1, 1, 1, 1, 1 },
-		{ 0, 1, 3, 0, 0, 0, 1 },
+		{ 0, 1, 0, 0, 0, 0, 1 },
 		{ 1, 1, 0, 0, 0, 0, 1 },
 		{ 9, 0, 0, 2, 0, 0, 1 },
 		{ 1, 1, 0, 0, 0, 4, 1 },
-		{ 0, 1, 1, 1, 1, 1, 1 }
+		{ 0, 1, 1, 0, 1, 1, 1 },
+        { 0, 0, 1, 9, 1, 0, 0 }
 		};
 
+        public int[,] W3 = new int[,] {
+        { 0, 1, 9, 1, 0, 0, 0 },
+        { 1, 1, 0, 1, 1, 1, 1 },
+        { 1, 0, 0, 0, 0, 4, 1 },
+        { 1, 0, 0, 2, 0, 4, 1 },
+        { 1, 0, 0, 0, 0, 4, 1 },
+        { 1, 1, 1, 1, 1, 1, 1 }
+        };
 
-		public void UpdateMap(int[,] NewMap)
+        public void UpdateMap(int[,] NewMap)
 		{
 			Map = NewMap;
 		}
@@ -52,6 +61,9 @@ namespace TextGame
 				case "W2":
 					W2 = Map;
 					break;
+                case "W3":
+                    W3 = Map;
+                    break;
 			}
 			switch (MapName)
 			{
@@ -63,6 +75,10 @@ namespace TextGame
 					Map = W2;
 					CurrentMap = "W2";
 					break;
+                case "W3":
+                    Map = W3;
+                    CurrentMap = "W3";
+                    break;
 			}
 		}
 	}
