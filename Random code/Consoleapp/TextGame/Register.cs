@@ -29,6 +29,14 @@ namespace TextGame
 			{"0003", "Enemy flesh" }
 		};
 
+        public string[,] ItemStatList = new string[,]
+        {
+            {"0000", "0", "0"},
+            {"0001", "10", "0"},
+            {"0002", "0", "10"},
+            {"0003", "0", "0"}
+        };
+
 		public string GetId(string name)
 		{
 			for (int i = 0; i < IdList.GetLength(0); i++)
