@@ -20,7 +20,7 @@ namespace extra_from_tavla_medelvarde
                 input = Convert.ToDouble(Console.ReadLine());
                 summa = summa + input;
 
-                if(large == 0)
+                if(i == 0)
                 {
                     large = input;
                 }
@@ -29,7 +29,7 @@ namespace extra_from_tavla_medelvarde
                     large = input;
                 }
 
-                if (small == 0)
+                if (i == 0)
                 {
                     small = input;
                 }
