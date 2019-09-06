@@ -10,6 +10,7 @@ namespace uppgift_1
     {
         static void Main(string[] args)
         {
+
         }
     }
 }
