@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ovningsuppgift16A", "ovning
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "circel", "circel\circel.csproj", "{0865CC48-0527-450C-BDE9-745CA41802EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "power and switch", "power and switch\power and switch.csproj", "{7F30AAFC-3793-43D0-9D1E-9FF287A0060D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{0865CC48-0527-450C-BDE9-745CA41802EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0865CC48-0527-450C-BDE9-745CA41802EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0865CC48-0527-450C-BDE9-745CA41802EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F30AAFC-3793-43D0-9D1E-9FF287A0060D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F30AAFC-3793-43D0-9D1E-9FF287A0060D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F30AAFC-3793-43D0-9D1E-9FF287A0060D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F30AAFC-3793-43D0-9D1E-9FF287A0060D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("metoder")]
+[assembly: AssemblyTitle("power and switch")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("metoder")]
+[assembly: AssemblyProduct("power and switch")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("630246d7-3028-411e-a6b9-5e62c8b78817")]
+[assembly: Guid("7f30aafc-3793-43d0-9d1e-9ff287a0060d")]
 
 // Version information for an assembly consists of the following four values:
 //

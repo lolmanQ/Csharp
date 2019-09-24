@@ -32,7 +32,7 @@ namespace circel
 
 		static double FloatMedel(double float1, double float2, double float3)
 		{
-			return (float1 + float2 + float3) / 2;
+			return (float1 + float2 + float3) / 3;
 		}
 	}
 }
